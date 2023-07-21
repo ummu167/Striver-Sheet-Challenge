@@ -1,0 +1,36 @@
+//method -1
+void sortColors(vector<int>& nums) {
+        int Z = 0,O = 0, T = 0;
+        for(int i =0;i  <nums.size();i++){
+            if(nums[i] == 0)
+                Z++;
+            else if(nums[i] == 1)
+                O++;
+            else
+            T++;
+            int j = 0;
+            while(j < Z)
+                nums[j++] = 0;
+            while(j < Z+O)
+                nums[j++] = 1;
+            while(j < Z + O + T)
+                nums[j++] = 2;
+            
+        }
+    }
+//method-2 
+void sortColors(vector<int>& nums) {
+        int i = 0, j = nums.size()-1,s = 0;
+        while(i <= j){
+            if(nums[i] == 0){
+                swap(nums[s++],nums[i++]);
+            }
+            else if(nums[i] == 2){
+                swap(nums[i],nums[j--]);
+            }
+            else if(nums[i] == 1){
+                i++;
+            }
+
+        }
+    }

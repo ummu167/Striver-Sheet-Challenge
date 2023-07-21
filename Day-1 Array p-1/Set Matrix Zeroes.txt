@@ -1,0 +1,23 @@
+ void setZeroes(vector<vector<int>>& matrix) {
+        int r = matrix.size();
+        int c = matrix[0].size();
+
+        vector<pair<int,int>> vec;
+        for(int i = 0; i < r;i++){
+            for(int j  = 0 ; j < c;j++){
+                if(matrix[i][j] == 0)
+                    vec.push_back({i,j});
+            }
+        }
+        for(auto it : vec){
+            int m  = it.first;
+            int n = it.second;
+            int i = 0;
+            while(i < c) 
+                matrix[m][i++] = 0;
+            int j = 0;
+            while(j < r)
+                matrix[j++][n] = 0;
+        }
+
+    }
