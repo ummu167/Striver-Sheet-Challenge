@@ -1,0 +1,18 @@
+ vector<vector<int>> merge(vector<vector<int>>& vals) {
+        sort(vals.begin(),vals.end());
+        vector<vector<int>> vec;
+        int n = vals.size();
+        vec.push_back(vals[0]);
+        for(int i = 1;i < n;i++){
+            int l = vec.size();
+            if(vec[l-1][1] >= vals[i][0]){
+                if(vals[i][1] >  vec[l-1][1])
+                    vec[l-1][1] = vals[i][1];
+            else
+                continue;
+            }
+            else
+                vec.push_back(vals[i]);   
+        }
+        return vec;
+    }
