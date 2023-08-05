@@ -1,0 +1,21 @@
+ int longestConsecutive(vector<int>& nums) {
+        int n = nums.size();
+        if(n== 0)
+            return n;
+        unordered_set<int> st;
+        int ans = INT_MIN;
+        for(auto it : nums)
+            st.insert(it);
+        for(auto it : nums){
+            if(st.find(it-1) == st.end()){
+                int cnt = 1;
+                int temp = it;
+                while(st.find(temp+1) != st.end()){
+                    cnt += 1;
+                    temp += 1;
+                }
+                ans = max(ans,cnt);
+            }
+           
+        }
+        return ans;
