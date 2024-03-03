@@ -1,3 +1,5 @@
+Method - 1
+
 int paths(int i,int j,int m,int n,vector<vector<int>> &dp){
         
         if(dp[i][j] != -1)
@@ -12,3 +14,17 @@ int paths(int i,int j,int m,int n,vector<vector<int>> &dp){
         vector<vector<int>> dp(m+1,vector<int>(n+1,-1));
         return paths(0,0,m,n,dp);
     }
+
+
+###################################################################
+Method - 2
+
+int uniquePaths(int m, int n){
+	int N = m+n-2;
+	int r = m - 1;
+	int ans = 1;
+	for(int i = 1; i <= r; i++{
+		ans *= (N-r+i)/i;
+	}
+	return ans;
+}
