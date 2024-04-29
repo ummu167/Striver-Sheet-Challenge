@@ -19,3 +19,31 @@ int trap(vector<int>& height) {
         
         return count;
     }
+
+
+
+method -2 
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int n = height.size();
+        vector<int> left_premax(n,0);
+        vector<int> right_premax(n,0);
+        int temp =0;
+        
+        for(int i = 0; i <n; i++ ){
+            left_premax[i] = max(temp,height[i]);
+            temp = max(height[i],temp);
+        }
+        temp = 0;
+        for(int i = n-1; i >= 0; i-- ){
+            right_premax[i] = max(temp,height[i]);
+            temp = max(height[i],temp);
+        }
+        int ans = 0;
+        for(int i= 0; i < n;i++){
+            ans = ans + min(left_premax[i],right_premax[i]) - height[i];
+        }
+        return ans;
+    }
+};
