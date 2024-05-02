@@ -1,0 +1,36 @@
+static bool helper(Job a,Job b){
+       return a.profit > b.profit;
+    }
+    //Function to find the maximum profit and the number of jobs done.
+    vector<int> JobScheduling(Job arr[], int n) 
+    { 
+        // your code here
+        int max_dead = 0;
+        sort(arr,arr+n,helper);
+        for( int i = 0; i < n; i++){
+            max_dead = max(max_dead,arr[i].dead);
+        }
+        int task = 0,profit = 0;
+        vector<int> vec(max_dead+1,-1);
+        for(int i= 0; i < n; i++){
+            
+            if(vec[arr[i].dead] == -1 ){
+                task++;
+                vec[arr[i].dead] = arr[i].dead;
+                profit += arr[i].profit;
+            }
+            else{
+                int j = arr[i].dead-1;
+                while(vec[j]!=-1 && j > 0 ){
+                    j--;
+                }
+                if(j > 0){
+                    task++;
+                    vec[j] = arr[i].dead;
+                    profit += arr[i].profit;
+                }
+            }
+        }
+        return {task,profit};
+        
+    } 
