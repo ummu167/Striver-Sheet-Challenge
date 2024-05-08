@@ -1,0 +1,23 @@
+void helper(int i,vector<int> subset,vector<int> &nums,int n,set<vector<int>> &st){
+        if(i == n){
+            sort(subset.begin(),subset.end());
+            st.insert(subset);
+            return;
+        }
+        helper(i+1,subset,nums,n,st);
+        subset.push_back(nums[i]);
+        helper(i+1,subset,nums,n,st);
+        
+    }
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        set<vector<int>> st;
+        vector<int> vec;
+        int n = nums.size();
+        helper(0,vec,nums,n,st);
+        vector<vector<int>> ans;
+        for(auto it : st){
+            ans.push_back(it);
+        }
+
+        return ans;
+    }
