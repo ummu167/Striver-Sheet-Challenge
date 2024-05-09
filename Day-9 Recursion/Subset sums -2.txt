@@ -1,0 +1,32 @@
+class Solution {
+public:
+    void helper(int ind,int n,vector<int> & candidates,int target,vector<int> vec,set<vector<int>>&st){
+        if(target == 0){
+            // sort(vec.begin(),vec.end());
+            st.insert(vec);
+            return;
+        }
+        if(ind >= n || target < 0)
+            return;
+        
+        vec.push_back(candidates[ind]);
+        helper(ind+1,n,candidates,target-candidates[ind],vec,st);
+        vec.pop_back();
+        while(ind < n &&ind+1 < n && candidates[ind] == candidates[ind+1])
+            ind++;
+        helper(ind+1,n,candidates,target,vec,st);
+
+
+        
+    }
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+        sort(candidates.begin(),candidates.end());
+        set<vector<int>> st;
+        vector<int> vec;
+        int n = candidates.size();
+        helper(0,n,candidates,target,vec,st);
+        vector<vector<int>> ans;
+        ans.assign(st.begin(),st.end());
+        return ans;
+    }
+};
