@@ -1,0 +1,26 @@
+class Solution {
+public:
+    void helper(int ind,int n,vector<int> & candidates,int target,vector<int> vec,set<vector<int>>&st){
+        if(target == 0){
+            st.insert(vec);
+            return;
+        }
+        if(ind >= n || target < 0)
+            return;
+        helper(ind+1,n,candidates,target,vec,st);
+        vec.push_back(candidates[ind]);
+        helper(ind,n,candidates,target-candidates[ind],vec,st);
+        
+    }
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        set<vector<int>> st;
+        vector<int> vec;
+        int n = candidates.size();
+        helper(0,n,candidates,target,vec,st);
+        vector<vector<int>> ans;
+        for(auto it : st){
+            ans.push_back(it);
+        }
+        return ans;
+    }
+};
