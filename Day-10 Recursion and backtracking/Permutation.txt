@@ -1,0 +1,76 @@
+class Solution {
+public:
+    void next_permutation(vector<int> &nums,int n){
+        int i = n-2;
+        int j = n-1;
+        while( i >= 0 && nums[i] >= nums[i+1])
+            i--;
+        if(i < 0){
+            return;
+        }
+        else{
+            while(j > i && nums[j] < nums[i])
+                j--;
+        }
+        swap(nums[i],nums[j]);
+        reverse(nums.begin()+i+1,nums.end());
+    }
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int>> vec;
+        sort(nums.begin(),nums.end());
+        vec.push_back(nums);
+        int fact = 1;
+        for(int i = 1; i <= nums.size();i++)
+            fact *= i;
+        int n = nums.size();
+        while(--fact){
+            next_permutation(nums,n);
+            vec.push_back(nums);
+        }
+        return vec;
+
+    }
+};
+
+##method-2 without sorting
+
+class Solution {
+public:
+    void next_permutation(vector<int> &nums,int n){
+        int i = n-2;
+        int j = n-1;
+        bool flag = true;
+        while( i >= 0 && nums[i] >= nums[i+1]){
+            i--;
+            flag = false;
+        }
+        if(i < 0 && flag ){
+            return;
+        }
+        else if(i < 0 && flag == false ){
+            reverse(nums.begin(),nums.end());
+            return;
+        }
+        else{
+            while(j > i && nums[j] < nums[i])
+                j--;
+        }
+        swap(nums[i],nums[j]);
+        reverse(nums.begin()+i+1,nums.end());
+    }
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int>> vec;
+        // sort(nums.begin(),nums.end());
+        vec.push_back(nums);
+        int fact = 1;
+        for(int i = 1; i <= nums.size();i++)
+            fact *= i;
+        int n = nums.size();
+        while(--fact){
+            next_permutation(nums,n);
+            vec.push_back(nums);
+        }
+        return vec;
+
+    }
+}; 
