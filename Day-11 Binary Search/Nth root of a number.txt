@@ -1,0 +1,27 @@
+double check(int val,int n,int m){
+  
+  double mul = 1;
+  for(int i = 0; i < n;i++){
+    mul = mul * val;
+    if(mul > m)
+      break;
+  }
+  return mul;
+}
+int NthRoot(int n, int m) {
+  // Write your code here.
+  int low = 1;
+  int high = m;
+  int mid;
+  while(low <= high){
+    mid = (low + high)/2;
+    double pw = check(mid, n,m);
+    if(pw == m)
+      return mid;
+    else if(pw < m)
+        low = mid+1;
+    else
+        high = mid-1; 
+  }
+  return -1;
+}
